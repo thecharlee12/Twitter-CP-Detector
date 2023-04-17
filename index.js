@@ -23,7 +23,10 @@ rules.then(function(res){
   }
 })
 
-stream.on(ETwitterStreamEvent.Data, console.log);
+stream.on(ETwitterStreamEvent.Data, data => {
+  console.log(data)
+  
+});
 
 stream.on(ETwitterStreamEvent.Connected, () => console.log('Stream is started.'));
 
