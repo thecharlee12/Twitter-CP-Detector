@@ -23,9 +23,20 @@ rules.then(function(res){
   }
 })
 
-stream.on(ETwitterStreamEvent.Data, data => {
+stream.on(ETwitterStreamEvent.Data, async data => {
+
+  var tweet = await client.v1.singleTweet(data.data.id);
+  var user = tweet.user;
+
+  var data = {
+    tweet_id: tweet.id,
+    user_id: user.id,
+    user_name: user.name,
+    full_text: tweet.full_text,
+    corrected_link: tweet.full_text.match(/\bhtt[^\s]*/g)[0].replace(/[^a-zA-Z \/:.]*/gm, "")
+  }
+
   console.log(data)
-  
 });
 
 stream.on(ETwitterStreamEvent.Connected, () => console.log('Stream is started.'));
