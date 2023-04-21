@@ -51,7 +51,7 @@ stream.on(ETwitterStreamEvent.Data, async data => {
     user_name: user.screen_name,
     full_text: tweet.full_text,
     corrected_link: correctlink,
-    pot_false_positive: isValidUrl(correctlink)
+    pot_false_positive: !isValidUrl(correctlink)
   }
   
   console.log(data)
